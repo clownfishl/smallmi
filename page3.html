@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>product</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="./js/UI/jquery-ui.min.css">
+	<link rel="stylesheet" href="./css/boot/css/bootstrap.min.css">
+	<script src="./js/jquery.js"></script>
+	<script src="./js/UI/jquery-ui.min.js"></script>
+	<style>
+		html,body{
+			height:100%;
+			padding:0 60px;
+		}
+		*{
+			margin:0;
+			padding:0;
+		}
+        .tbl{
+
+        }
+	</style>
+</head>
+<body>
+  <div id="editPanel" style="display:none;">
+    <form>
+        <div class="form-group">
+          <label>标题</label>
+          <input autocomplete="off" name="title" type="text" class="form-control">
+        </div>
+        <div class="form-group" >
+          <label>描述</label>
+          <input autocomplete="off" name="desc" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>文本</label>
+          <input autocomplete="off" name="text" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>文本1</label>
+          <input autocomplete="off" name="txt" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>文本2</label>
+          <input autocomplete="off" name="txt1" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>样式</label>
+          <input autocomplete="off" name="style" type="text" class="form-control">
+        </div>
+        <div class="form-group" >
+          <label>价格</label>
+          <input autocomplete="off" name="price" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>优惠价</label>
+          <input autocomplete="off" name="rprice" type="text" class="form-control">
+        </div>
+         <div class="form-group">
+          <label>链接</label>
+          <input autocomplete="off" name="href" type="text" class="form-control">
+        </div>
+        <div class="form-group" >
+          <label>字体</label>
+          <input autocomplete="off" name="font" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>主题</label>
+          <input autocomplete="off" name="thumb" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>状态</label>
+          <select name="status" class="form-control">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+    </form>
+   </div> 
+
+
+   <div id="addPanel" style="display:none;">
+    <form>
+        <div class="form-group">
+          <label>标题</label>
+          <input autocomplete="off" name="title" type="text" class="form-control">
+        </div>
+        <div class="form-group" >
+          <label>描述</label>
+          <input autocomplete="off" name="desc" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>文本</label>
+          <input autocomplete="off" name="text" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>文本1</label>
+          <input autocomplete="off" name="txt" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>文本2</label>
+          <input autocomplete="off" name="txt1" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>样式</label>
+          <input autocomplete="off" name="style" type="text" class="form-control">
+        </div>
+        <div class="form-group" >
+          <label>价格</label>
+          <input autocomplete="off" name="price" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>优惠价</label>
+          <input autocomplete="off" name="rprice" type="text" class="form-control">
+        </div>
+         <div class="form-group">
+          <label>链接</label>
+          <input autocomplete="off" name="href" type="text" class="form-control">
+        </div>
+        <div class="form-group" >
+          <label>字体</label>
+          <input autocomplete="off" name="font" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>主题</label>
+          <input autocomplete="off" name="thumb" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>状态</label>
+          <select name="status" class="form-control">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+    </form>
+   </div>
+  <button class="add-btn btn btn-default">添加</button>
+  <table class="table table-bordered tbl">
+		<thead>
+			<tr>
+				<th>标题</th>
+				<th>描述</th>
+				<th>文本</th>
+				<th>评价</th>
+				<th>来源</th>
+				<th>样式</th>
+				<th>价格</th>
+                <th>优惠</th>
+                <th>链接</th>
+				<th>字体</th>
+                <th>主题</th>
+                <th>状态</th>
+                <th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>    
+  </table> 
+  <script>
+  	  $(function(){
+  	  	//样式
+  	  	$('thead tr th').css('background','#e9e9e9');
+  	  	//获取数据
+         $.get('./data/prodect-select.php',function(data){
+         	var html='';
+            $(data).map(function(k,v){
+              html+='<tr>';
+              html+='<td>'+v.title+'</td>';
+              html+='<td>'+v.desc+'</td>';
+              html+='<td>'+v.text+'</td>';
+              html+='<td>'+v.txt+'</td>';
+              html+='<td>'+v.txt1+'</td>';
+              html+='<td>'+v.style+'</td>';
+              html+='<td>'+v.price+'</td>';
+              html+='<td>'+v.rprice+'</td>';
+              html+='<td>'+v.href+'</td>';
+              html+='<td>'+v.font+'</td>';
+              html+='<td>'+v.thumb+'</td>';
+              html+='<td>'+v.status+'</td>';
+              html += '<td><span data-id="' + v.id + '" class="btn btn-danger btn-xs delete-btn">删除</span> <span data-status="' + v.status + '" data-thumb="' + v.thumb + '" data-font="' + v.font + '" data-href="' + v.href + '" data-rprice="' + v.rprice + '" data-price="' + v.price + '" data-style="' + v.style + '" data-txt1="' + v.txt1 + '"  data-txt="' + v.txt + '" data-text="' + v.text + '" data-desc="' + v.desc + '" data-title="' + v.title + '" data-id="' + v.id + '" class="btn btn-info btn-xs edit-btn">编辑</span></td>';
+              html+='</tr>';
+	          });
+	          $('tbody').html(html);
+	          //删除
+	          $('.tbl').on('click','.delete-btn',function(){
+	               var th = $(this);
+	              //动态创建一个div
+	              $('<div>删除不可恢复？</div>').dialog({
+	                modal:true,
+	                title:"删除",
+	                buttons:[
+	                  {
+	                    text:"确定",
+	                    click:function(){
+	                       th.parent().parent().remove();
+	                       //后台删除
+	                       var id=th.data('id');
+	                       $.get('./data/prodect-delete.php',{id:id});
+	                       $(this).dialog('close');
+	                    }
+	                  }
+	                ],
+	              });
+	           });
+	          //编辑
+	          $('.tbl').on('click','.edit-btn',function(){
+	             var th = $(this);
+	             $('#editPanel').dialog({
+	                modal:true,
+	                title:"编辑",
+	                open:function(){
+	                  //获取编辑表单对象
+	                  var form= $(this).find('form')[0];
+	                  form.title.value=th.data('title');
+	                  form.desc.value=th.data('desc');
+	                  form.text.value = th.data('text');
+	                  form.style.value=th.data('style');
+	                  form.txt.value = th.data('txt');
+	                  form.txt1.value=th.data('txt1');
+	                  form.price.value=th.data('price');
+	                  form.rprice.value=th.data('rprice');
+	                  form.href.value=th.data('href');
+	                  form.font.value = th.data('font');
+	                  form.thumb.value=th.data('thumb');
+	                  form.status.value=th.data('status');
+	                },
+	                buttons:[
+	                  {
+	                     text:"保存",
+	                     click:function(){
+	                        //获取编辑表单对象
+	                        var form= $(this).find('form')[0];
+	                        //找到当前行
+	                        var curRow = th.parent().parent();
+	                        curRow.find('td:eq(0)').text(form.title.value);
+	                        curRow.find('td:eq(1)').text(form.desc.value);
+	                        curRow.find('td:eq(2)').text(form.text.value);
+	                        curRow.find('td:eq(3)').text(form.txt.value);
+	                        curRow.find('td:eq(4)').text(form.txt1.value);
+	                        curRow.find('td:eq(5)').text(form.style.value);
+	                        curRow.find('td:eq(6)').text(form.price.value);
+	                        curRow.find('td:eq(7)').text(form.rprice.value);
+	                        curRow.find('td:eq(8)').text(form.href.value);
+	                        curRow.find('td:eq(9)').text(form.font.value);
+	                        curRow.find('td:eq(10)').text(form.thumb.value);
+	                        curRow.find('td:eq(11)').text(form.status.value);
+	                        //回填自定义属性
+	                        th.data('title',form.title.value);
+	                        th.data('desc',form.desc.value);
+	                        th.data('text',form.text.value);
+	                        th.data('txt',form.txt.value);
+	                        th.data('txt1',form.txt1.value);
+	                        th.data('style',form.style.value);
+	                        th.data('price',form.price.value);
+	                        th.data('rprice',form.rprice.value);
+	                        th.data('href',form.href.value);
+	                        th.data('font',form.font.value);
+	                        th.data('thumb',form.thumb.value);
+	                        th.data('status',form.status.value);
+	                        //后台更新
+	                        $.post('./data/prodect-update.php',th.data(),function(data){
+	                          console.log(data);
+	                        })
+	                        $(this).dialog('close');
+	                     }
+	                  }
+	                ]
+	             });
+	          })
+          },'json');
+         //添加事件
+         $('.add-btn').click(function(){
+         //弹出模态框
+	         $('#addPanel').dialog({
+	             modal:true,
+	             title:'添加',
+	             buttons:[
+	              {
+	                text:'保存',
+	                click:function(){
+	                    var form = $(this).find('form')[0];
+	                    var data={};
+	                    data.title=form.title.value;
+	                    data.desc=form.desc.value;
+	                    data.text=form.text.value;
+	                    data.txt=form.txt.value;
+	                    data.txt1=form.txt1.value;
+	                    data.style=form.style.value;
+	                    data.price=form.price.value;
+	                    data.rprice=form.rprice.value;
+	                    data.href=form.href.value;
+	                    data.font=form.font.value;
+	                    data.thumb=form.thumb.value;
+	                    data.status=form.status.value;
+	                    //像后台提交数据
+	                    $.get('./data/prodect-insert.php',data,function(id){
+	                      var html = "<tr>";
+	                      html+='<td>'+data.title+'</td>';
+			              html+='<td>'+data.desc+'</td>';
+			              html+='<td>'+data.text+'</td>';
+			              html+='<td>'+data.txt+'</td>';
+			              html+='<td>'+data.txt1+'</td>';
+			              html+='<td>'+data.style+'</td>';
+			              html+='<td>'+data.price+'</td>';
+			              html+='<td>'+data.rprice+'</td>';
+			              html+='<td>'+data.href+'</td>';
+			              html+='<td>'+data.font+'</td>';
+			              html+='<td>'+data.thumb+'</td>';
+			              html+='<td>'+data.status+'</td>';
+	                      html+='<td><span data-id="' + id + '" class="btn btn-danger btn-xs delete-btn">删除</span> <span data-id="'+id+'" data-title="'+data.title+'" data-desc="'+data.desc+'"  data-text="'+data.text+'"  data-txt="'+data.txt+'"  data-txt1="'+data.txt1+'" data-style="'+data.style+'" data-price="'+data.price+'"  data-rprice="'+data.rprice+'" data-href="'+data.href+'" data-font="'+data.font+'"  data-thumb="'+data.thumb+'" data-status="'+data.status+'" class="btn btn-info btn-xs edit-btn">编辑</span></td> ';
+	                      html += "</tr>";
+	                      $('.tbl tbody').append(html);
+	                      form.reset();
+	                      });
+
+	                    //像后台提交数据
+	                    // insert(data);
+	                    $(this).dialog('close');
+	                       }
+	                    }
+	             ]
+	         });
+         });
+
+       });
+  </script>
+</body>
+</html>

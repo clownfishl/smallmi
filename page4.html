@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>footer</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="./js/UI/jquery-ui.min.css">
+	<link rel="stylesheet" href="./css/boot/css/bootstrap.min.css">
+	<script src="./js/jquery.js"></script>
+	<script src="./js/UI/jquery-ui.min.js"></script>
+	<style>
+		html,body{
+			height:100%;
+			padding:0 60px;
+		}
+		*{
+			margin:0;
+			padding:0;
+		}
+        .tbl{
+
+        }
+	</style>
+</head>
+<body>
+  <div id="editPanel" style="display:none;">
+    <form>
+        <div class="form-group">
+          <label>内容</label>
+          <input autocomplete="off" name="text" type="text" class="form-control">
+        </div>
+        <div class="form-group" >
+          <label>文本</label>
+          <input autocomplete="off" name="txt" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>文本1</label>
+          <input autocomplete="off" name="txt1" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>文本2</label>
+          <input autocomplete="off" name="txt2" type="text" class="form-control">
+        </div>
+        <div class="form-group" >
+          <label>样式</label>
+          <input autocomplete="off" name="style" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>字体</label>
+          <input autocomplete="off" name="font" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>路径</label>
+          <input autocomplete="off" name="src" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>状态</label>
+          <select name="type" class="form-control">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+          </select>
+        </div>
+    </form>
+   </div> 
+
+
+   <div id="addPanel" style="display:none;">
+    <form>
+        <div class="form-group">
+          <label>内容</label>
+          <input autocomplete="off" name="text" type="text" class="form-control">
+        </div>
+        <div class="form-group" >
+          <label>文本</label>
+          <input autocomplete="off" name="txt" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>文本1</label>
+          <input autocomplete="off" name="txt1" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>文本2</label>
+          <input autocomplete="off" name="txt2" type="text" class="form-control">
+        </div>
+        <div class="form-group" >
+          <label>样式</label>
+          <input autocomplete="off" name="style" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>字体</label>
+          <input autocomplete="off" name="font" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>路径</label>
+          <input autocomplete="off" name="src" type="text" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>状态</label>
+          <select name="type" class="form-control">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+          </select>
+        </div>
+    </form>
+   </div>
+  <button class="add-btn btn btn-default">添加</button>
+  <table class="table table-bordered tbl">
+		<thead>
+			<tr>
+				<th>内容</th>
+				<th>文本</th>
+				<th>文本1</th>
+				<th>文本2</th>
+				<th>样式</th>
+				<th>字体</th>
+				<th>路径</th>
+				<th>状态</th>
+                <th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>    
+  </table> 
+  <script>
+  	  $(function(){
+  	  	//样式
+  	  	$('thead tr th').css('background','#e9e9e9');
+  	  	//获取数据
+         $.get('./data/footer-select.php',function(data){
+         	var html='';
+            $(data).map(function(k,v){
+              html+='<tr>';
+              html+='<td>'+v.text+'</td>';
+              html+='<td>'+v.txt+'</td>';
+              html+='<td>'+v.txt1+'</td>';
+              html+='<td>'+v.txt2+'</td>';
+              html+='<td>'+v.style+'</td>';
+              html+='<td>'+v.font+'</td>';
+              html+='<td>'+v.src+'</td>';
+              html+='<td>'+v.type+'</td>';
+              html += '<td><span data-id="' + v.id + '" class="btn btn-danger btn-xs delete-btn">删除</span> <span data-type="' + v.type + '" data-src="' + v.src + '" data-font="' + v.font + '" data-style="' + v.style + '" data-txt2="' + v.txt2 + '" data-txt1="' + v.txt1 + '"data-txt="' + v.txt + '" data-text="' + v.text + '" data-id="' + v.id + '" class="btn btn-info btn-xs edit-btn">编辑</span></td>';
+              html+='</tr>';
+	          });
+	          $('tbody').html(html);
+	          //删除
+	          $('.tbl').on('click','.delete-btn',function(){
+	               var th = $(this);
+	              //动态创建一个div
+	              $('<div>删除不可恢复？</div>').dialog({
+	                modal:true,
+	                title:"删除",
+	                buttons:[
+	                  {
+	                    text:"确定",
+	                    click:function(){
+	                       th.parent().parent().remove();
+	                       //后台删除
+	                       var id=th.data('id');
+	                       $.get('./data/footer-delete.php',{id:id});
+	                       $(this).dialog('close');
+	                    }
+	                  }
+	                ],
+	              });
+	           });
+	          //编辑
+	          $('.tbl').on('click','.edit-btn',function(){
+	             var th = $(this);
+	             $('#editPanel').dialog({
+	                modal:true,
+	                title:"编辑",
+	                open:function(){
+	                  //获取编辑表单对象
+	                  var form= $(this).find('form')[0];
+	                  form.text.value=th.data('text');
+	                  form.txt.value=th.data('txt');
+	                  form.txt1.value = th.data('txt1');
+	                  form.txt2.value=th.data('txt2');
+	                  form.style.value=th.data('style');
+	                  form.font.value = th.data('font');
+	                  form.src.value=th.data('src');
+	                  form.type.value=th.data('type');
+	                },
+	                buttons:[
+	                  {
+	                     text:"保存",
+	                     click:function(){
+	                        //获取编辑表单对象
+	                        var form= $(this).find('form')[0];
+	                        //找到当前行
+	                        var curRow = th.parent().parent();
+	                        curRow.find('td:eq(0)').text(form.text.value);
+	                        curRow.find('td:eq(1)').text(form.txt.value);
+	                        curRow.find('td:eq(2)').text(form.txt1.value);
+	                        curRow.find('td:eq(3)').text(form.txt2.value);
+	                        curRow.find('td:eq(4)').text(form.style.value);
+	                        curRow.find('td:eq(5)').text(form.font.value);
+	                        curRow.find('td:eq(6)').text(form.src.value);
+	                        curRow.find('td:eq(7)').text(form.type.value);
+	                        //回填自定义属性
+	                        th.data('text',form.text.value);
+	                        th.data('txt',form.txt.value);
+	                        th.data('txt1',form.txt1.value);
+	                        th.data('txt2',form.txt2.value);
+	                        th.data('style',form.style.value);
+	                        th.data('font',form.font.value);
+	                        th.data('src',form.src.value);
+	                        th.data('type',form.type.value);
+	                        //后台更新
+	                        $.post('./data/footer-update.php',th.data(),function(data){
+	                          console.log(data);
+	                        })
+	                        $(this).dialog('close');
+	                     }
+	                  }
+	                ]
+	             });
+	          })
+          },'json');
+         //添加事件
+         $('.add-btn').click(function(){
+         //弹出模态框
+	         $('#addPanel').dialog({
+	             modal:true,
+	             title:'添加',
+	             buttons:[
+	              {
+	                text:'保存',
+	                click:function(){
+	                    var form = $(this).find('form')[0];
+	                    var data={};
+	                    data.text=form.text.value;
+	                    data.txt=form.txt.value;
+	                    data.txt1=form.txt1.value;
+	                    data.txt2=form.txt2.value;
+	                    data.style=form.style.value;
+	                    data.font=form.font.value;
+	                    data.src=form.src.value;
+	                    data.type=form.type.value;
+	                    //像后台提交数据
+	                    $.get('./data/footer-insert.php',data,function(id){
+	                      var html = "<tr>";
+	                      html+='<td>'+data.text+'</td>';
+			              html+='<td>'+data.txt+'</td>';
+			              html+='<td>'+data.txt1+'</td>';
+			              html+='<td>'+data.txt2+'</td>';
+			              html+='<td>'+data.style+'</td>';
+			              html+='<td>'+data.font+'</td>';
+			              html+='<td>'+data.src+'</td>';
+			              html+='<td>'+data.type+'</td>';
+	                      html+='<td><span data-id="' + id + '" class="btn btn-danger btn-xs delete-btn">删除</span> <span data-id="'+id+'" data-text="'+data.text+'" data-txt="'+data.txt+'"  data-txt1="'+data.txt1+'" data-txt2="'+data.txt2+'" data-style="'+data.style+'"  data-font="'+data.font+'" data-src="'+data.src+'" data-type="'+data.type+'" class="btn btn-info btn-xs edit-btn">编辑</span></td> ';
+	                      html += "</tr>";
+	                      $('.tbl tbody').append(html);
+	                      form.reset();
+	                      });
+
+	                    //像后台提交数据
+	                    // insert(data);
+	                    $(this).dialog('close');
+	                       }
+	                    }
+	             ]
+	         });
+         });
+
+       });
+  </script>
+</body>
+</html>

@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="./js/UI/jquery-ui.min.css">
+	<link rel="stylesheet" href="./css/boot/css/bootstrap.min.css">
+	<script src="./js/jquery.js"></script>
+	<script src="./js/UI/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="./css/second.css">
+	<link rel="stylesheet" href="//at.alicdn.com/t/font_402651_vwfzw9f7l17wg66r.css">
+</head>
+<body>
+  <!--头部  -->
+	<div class="header">
+		<ul class="navlist1"></ul>
+		<div class="ny">
+			<div class="nyer"></div>
+		</div>
+		<ul class="nz"></ul>
+	</div>
+  <!-- 导航条下 -->
+	<div class="next">
+	    <div class="bz"></div>
+	    <div class="navlist2">
+	        <a class="na1"></a>   
+	        <a class="na2"></a>   
+	        <a class="na3"></a>   
+	        <a class="na4"></a>      
+	        <a class="na5"></a>   
+	        <a class="na6"></a> 
+	        <a class="na7"></a>   
+	        <a class="na8"></a>   
+	    </div>
+	    <div class="search">
+	 	    <div class="sz">
+	 	  	    <input type="text" class="inp">
+	 	    </div>
+	 	    <div class="sy"></div>
+	        <ul class="yincang"></ul>
+	    </div>
+	    <div class="yin1">
+	        <div class="yin1s">
+	            <ul class="yins"></ul>
+	        </div>
+	        <div class="yin1s1">
+	            <ul class="yins1"></ul>
+	        </div>
+	        <div class="yin1s2">
+	            <ul class="yins2"></ul>
+	        </div>
+	        <div class="yin1s3">
+	            <ul class="yins3"></ul>
+	        </div>
+	    </div>
+	</div>
+	<!-- 首页 -->
+	<div class="home"></div>
+	<div class="center">
+		<div class="centerz"></div>
+		<div class="centery">
+			<div class="cens">
+				<div class="cson1">
+					<div class="pic">
+						<img id="pison" src="./pic/photo.jpg">
+					</div>
+				</div>
+				<ul class="cson2">
+				</ul>
+			</div>
+			<div class="cenx"></div>
+		</div>
+	</div>
+   <!-- 未引入插件 -->
+   <!--  <div class="motal">
+        <div class="motal-son">
+	    	<p>设置头像</p><hr>
+	    	<p>请上传图片：</p>
+	    	<form id="frm" onsubmit="return false;">
+		       <p>
+		   	   	 <input onchange="selectFiles(this);" type="file" name="file">
+		   	   </p>
+		   	   <p>
+		   	   	 <input onclick="save();" type="button" value="保存">
+		   	   </p>
+		    </form>
+	        <p>jpg或png,大小不超过2M</p>
+	        <div class="file_list"></div>
+	        <div class="cancel">取消</div>
+	        <div class="close">X</div>
+        </div>
+    </div> -->
+
+	<!-- 上传图像模态框工具 -->
+	<!-- <div id="dialog" style="display:none;"> 
+	    <p class="dia-p"></p>
+	    <form id="frm" onsubmit="return false;">
+	       <p>
+	   	   	 <input onchange="selectFiles(this);" type="file" name="file">
+	   	   </p>
+	   	   <p>
+	   	   	 <input onclick="save();" type="button" value="保存">
+	   	   </p>
+	    </form>
+	    <p class="dia-p2"></p>
+	    <div class="file_list"></div>
+	    <div class="key">
+		    <div class="save"></div>
+		    <div class="cancel"></div>
+	    </div>
+	</div> -->
+
+
+	 <!-- 底部 -->
+	  <div class="footer">
+	  	<ul class="f1"></ul>
+	  	<div class="f2">
+	  		<div class="f2s">
+	  			<div class="f2sz"></div>
+	  			<div class="f2sy"></div>
+	  		</div>
+	  	</div>
+	  </div>
+	  <div class="last">
+	  	<div class="lasts">
+	  		<div class="lastsz"></div>
+	  		<div class="lastszh">
+	  			<p class="lastps"></p>
+	  			<p class="lastpx"></p>
+	  		</div>
+	  		<div class="lastsy"></div>
+	  	</div>
+	  	<div class="lastx"></div>
+	  </div>
+    <script>
+    	$(function(){
+            $.get('./data/info.php',function(data){
+	           	$(data).map(function(k,v){
+	                 if(v.type==1){
+                        var oTxt1 = '<a href="'+v.href+'">'+v.text+'</a><span>'+v.title+'</span>';
+                        $('.home').append(oTxt1);
+	                 } 
+	                 if(v.type==2){
+                        var oTxt2 = '<div><h3>'+v.text+'</h3><ul><li>'+v.txt+'</li><li>'+v.txt1+'</li><li>'+v.txt2+'</li><li>'+v.txt3+'</li><li>'+v.txt4+'</li><li>'+v.txt5+'</li><li>'+v.txt6+'</li><li>'+v.txt7+'</li><li>'+v.txt8+'</li></ul></div>';
+                        $('.centerz').append(oTxt2);
+	                 }  
+	                 if(v.type==3){
+                        var oTxt3 = '<div><h2>'+v.text+'</h2><p>'+v.title+'</p><br><a href="">'+v.txt+'</a></div>';
+                        $('.cson1').append(oTxt3);
+	                 }  
+	                 // if(v.type==6){
+                  //       var oTxt3 = '<img src="'+v.src+'">';
+                  //       $('.cson1 .pic').append(oTxt3);
+	                 // }  
+	                 if(v.type==4){
+                        var oTxt4 = '<li><span>'+v.text+'</span><span>'+v.title+'</span><span>'+v.txt+'</span></li>';
+                        $('.cson2').append(oTxt4);
+	                 }  
+	                 if(v.type==5){
+                        var oTxt5 = '<li><img src="'+v.src+'"><div><p>'+v.text+'<span>'+v.txt+'</span></p><p>'+v.title+'<span>'+v.foot+'</span></p></div></li>';
+                        $('.cenx').append(oTxt5);
+	                 }  
+	                 if(v.type==7){
+                        var oTxt7 = '<span>'+v.text+'</span>';
+                        $('.dia-p').append(oTxt7);
+	                 }  
+	                 // if(v.type==8){
+                  //       var oTxt8 = '<span>'+v.text+'</span>';
+                  //       $('.upload').append(oTxt8);
+	                 // }  
+	                 // if(v.type==9){
+                  //       var oTxt9 = '<span>'+v.text+'</span>';
+                  //       $('.dia-p2').append(oTxt9);
+	                 // }  
+	                 // if(v.type==10){
+                  //       var oTxt10 = '<span>'+v.text+'</span>';
+                  //       $('.cancel').append(oTxt10);
+	                 // }  
+	                 // if(v.type==11){
+                  //       var oTxt11 = '<span>'+v.text+'</span>';
+                  //       $('.save').append(oTxt11);
+	                 // }  
+	           	});
+            },'json');
+            /*
+                   //图片的点击事件
+                   $('.pic').click(function(){
+                   	  $('#dialog').dialog({
+                           modal: true, 
+                           title:'设置头像',
+                           height:330,
+                           width:460,
+                   	  });
+                   });
+                    $('.cancel').click(function(){
+                        $('#dialog').dialog('close');
+			        });
+            */
+                   // $('.pic').click(function(){
+                   //    $('.motal').css('display','block');
+                   // });
+                   // $('.cancel').click(function(){
+                   //    $('.motal').css('display','none');
+                   // });
+                   // $('.close').click(function(){
+                   //    $('.motal').css('display','none');
+                   // });
+                   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    		$.get('./data/nav.php',function(data){
+             $(data).map(function(k,v){
+                if(v.type ==1){
+                	//header 左
+                   var oLi = '<li><a href="'+v.href+'">'+v.text+'</a></li>';
+                   var oLi1='<li>|</li>'
+                   $('.navlist1').append(oLi);
+                   $('.navlist1').append(oLi1);
+                }
+                //header 中
+                if(v.type==2){
+                   var ozLi = '<li><a href="'+v.href+'">'+v.text+'</a></li>';
+                   var ozLi1='<li>|</li>'
+                   $('.nz').append(ozLi);
+                   $('.nz').append(ozLi1);
+                }
+                //header 右
+                if(v.type==3){
+                	var oTxt = '<span>'+v.font+'</span><span>'+v.text+'</span>';
+                   $('.ny').append(oTxt);
+                }
+                if(v.type==8){
+                	var oNy='<p>'+v.text+'</p>';
+                  $('.nyer').append(oNy);
+                }
+                //neck 中部导航
+                if(v.type==4){
+                  var oTxt = '<span>'+v.text+'</span>';
+                   $('.na1').append(oTxt);
+                }
+                if(v.type==11){
+                  var oTxt = '<span>'+v.text+'</span>';
+                   $('.na2').append(oTxt);
+                }
+                if(v.type==12){
+                  var oTxt = '<span>'+v.text+'</span>';
+                   $('.na3').append(oTxt);
+                }
+                if(v.type==13){
+                  var oTxt = '<span>'+v.text+'</span>';
+                   $('.na4').append(oTxt);
+                }
+                if(v.type==14){
+                  var oTxt = '<span>'+v.text+'</span>';
+                   $('.na5').append(oTxt);
+                }
+                if(v.type==15){
+                  var oTxt = '<span>'+v.text+'</span>';
+                   $('.na6').append(oTxt);
+                }
+                if(v.type==16){
+                  var oTxt = '<span>'+v.text+'</span>';
+                   $('.na7').append(oTxt);
+                }
+                if(v.type==17){
+                  var oTxt = '<span>'+v.text+'</span>';
+                   $('.na8').append(oTxt);
+                }
+                // // neck 搜索
+                if(v.type==5){
+                  var oP1='<span>'+v.text+'</span>';
+                  $('.sz').append(oP1);
+                }
+                 if(v.type==9){
+                	var oTb1 = '<span>'+v.font+'</span>';
+                  $('.sy').append(oTb1);
+                }
+                if(v.type==10){
+                  var oTb2 = '<li><span>'+v.text+'</span><span>'+v.rst+'</span></li>';
+                  $('.yincang').append(oTb2);
+                }
+             });
+          },'json');
+          //   //shoppingcar 点击事件
+          $('.ny').mouseover(function(){
+              $('.nyer').css('display','block');
+          });
+          $('.ny').mouseout(function(){
+              $('.nyer').css('display','none');
+          });
+          // //search 点击事件
+          $('.inp').click(function(){
+              $('.inp').siblings().css('display','none');
+              $('.inp').parents().css('borderColor','red');
+              $('.yincang').css('display','block');
+          });
+          $('.sy').click(function(){
+              $('.inp').siblings().css('display','block');
+              $('.inp').parents().css('borderColor','#ddd');
+              $('.yincang').css('display','none');
+          });
+          //neck
+          $.get('./data/pics.php',function(data){
+             $(data).map(function(k,v){
+                if(v.type ==1){
+                   var obz = '<img src="'+v.src+'">';
+                   $('.bz').append(obz);
+                }
+             });   
+          },'json');
+          // //二级菜单隐藏部分
+          // //yin1s
+           $('.navlist2').find('a:eq(0)').mouseover(function(){
+               $('.yin1').css('display','block');
+               $('.yin1s').css('display','block');
+               $('.yin1s1').css('display','none');
+               $('.yin1s2').css('display','none');
+               $('.yin1s3').css('display','none');
+           });
+           $('.navlist2').find('a:eq(0)').mouseout(function(){
+               $('.yin1').css('display','none');
+           });
+           //yin1s1
+           $('.navlist2').find('a:eq(1)').mouseover(function(){
+               $('.yin1').css('display','block');
+               $('.yin1s1').css('display','block');
+               $('.yin1s').css('display','none');
+               $('.yin1s2').css('display','none');
+               $('.yin1s3').css('display','none');
+           });
+           $('.navlist2').find('a:eq(1)').mouseout(function(){
+               $('.yin1').css('display','none');
+           });
+           //yin1s2
+           $('.navlist2').find('a:eq(2)').mouseover(function(){
+               $('.yin1').css('display','block');
+               $('.yin1s2').css('display','block');
+               $('.yin1s').css('display','none');
+               $('.yin1s1').css('display','none');
+               $('.yin1s3').css('display','none');
+           });
+           $('.navlist2').find('a:eq(2)').mouseout(function(){
+               $('.yin1').css('display','none');
+           });
+          //yin1s3
+           $('.navlist2').find('a:eq(3)').mouseover(function(){
+               $('.yin1').css('display','block');
+               $('.yin1s3').css('display','block');
+               $('.yin1s').css('display','none');
+               $('.yin1s1').css('display','none');
+               $('.yin1s2').css('display','none');
+           });
+           $('.navlist2').find('a:eq(3)').mouseout(function(){
+               $('.yin1').css('display','none');
+           });
+           //yin1
+           $('.yin1').mouseover(function(){
+               $('.yin1').css('display','block');
+           });
+           $('.yin1').mouseout(function(){
+               $('.yin1').css('display','none');
+           });
+	        $.get('./data/prodect.php',function(data){
+	            $(data).map(function(k,v){ 
+                  //yins
+                  if(v.status==20){
+                      var oTit13 = '<li><div style="'+v.style+'">'+v.text+'</div><img src="'+v.thumb+'"><p>'+v.title+'</p><p>'+v.price+'</p></li><li></li>';
+                      $('.yins').append(oTit13); 
+                  }
+                  //yins1
+                  if(v.status==21){
+                      var oTit14 = '<li><div style="'+v.style+'">'+v.text+'</div><img src="'+v.thumb+'"><p>'+v.title+'</p><p>'+v.price+'</p></li><li></li>';
+                      $('.yins1').append(oTit14); 
+                  }
+                  //yins2
+                  if(v.status==22){
+                      var oTit15 = '<li><div style="'+v.style+'">'+v.text+'</div><img src="'+v.thumb+'"><p>'+v.title+'</p><p>'+v.price+'</p></li><li></li>';
+                      $('.yins2').append(oTit15); 
+                  }
+                  //yins3
+                  if(v.status==23){
+                      var oTit16 = '<li><div style="'+v.style+'">'+v.text+'</div><img src="'+v.thumb+'"><p>'+v.title+'</p><p>'+v.price+'</p></li><li></li>';
+                      $('.yins3').append(oTit16); 
+                  }
+	            });
+	        },'json');
+
+
+
+            // 底部
+           $.get('./data/footer.php',function(data){
+               $(data).map(function(k,v){
+               	// 底部图标li
+                  if(v.type==1){
+                      var oHtml5 = '<li style="'+v.style+'"><span>'+v.font+'</span>'+v.text+'</li>'
+               	    $('.f1').append(oHtml5); 
+               	}
+               	//底部dl导航
+                  if(v.type==2){
+                      var oHtml6 = '<dl><dt>'+v.text+'</dt><dd>'+v.txt+'</dd><dd>'+v.txt1+'</dd><dd>'+v.txt2+'</dd></dl>'
+               	    $('.f2sz').append(oHtml6); 
+               	}
+               	//底部在线客服
+               	if(v.type==3){
+                      var oHtml7 = '<p>'+v.text+'</p><p>'+v.txt+'</p><p>'+v.txt1+'</p><div><span>'+v.font+'</span>'+v.txt2+'</div>';
+               	    $('.f2sy').append(oHtml7); 
+               	}
+               	//底部小米图标
+               	if(v.type==4){
+               		var oHtml8 = '<img src="'+v.src+'">';
+               	    $('.lastsz').append(oHtml8); 
+               	}
+               	//底部li列表
+               	if(v.type==5){
+               		var oHtml9 = '<a href="">'+v.text+'</a><span></span>';
+               	    $('.lastps').append(oHtml9); 
+               	}
+               	//底部链接@
+               	if(v.type==6){
+               		var oHtml9 = '<span>'+v.text+'</span>';
+               	    $('.lastpx').append(oHtml9); 
+               	}
+               	//底部链接
+               	if(v.type==7){
+               		var oHtml10 = '<a href="">'+v.text+'</a>';
+               	    $('.lastpx').append(oHtml10); 
+               	}
+               	// 底部链接
+               	if(v.type==8){
+               		var oHtml11 = '<p>'+v.text+'</p>';
+               	    $('.lastpx').append(oHtml11); 
+               	}
+               	//底部图片
+               	if(v.type==9){
+               		var oHtml12='<img src="'+v.src+'">';
+               		$('.lastsy').append(oHtml12);
+               	}
+               	//小米为发烧而生
+               	if(v.type==10){
+               		var oHtml13='<img src="'+v.src+'">';
+               		$('.lastx').append(oHtml13);
+               	}
+               });
+           },'json');
+
+    	});
+             
+           //    //onchange 事件
+			        //  function selectFiles(th){
+			        //      var files =th.files;//一个数组
+			        //      for(var i=0;i<files.length;i++){
+			        //       var filename = files[i].name;
+			        //       var oPgs = document.createElement('progress');
+			        //       oPgs.value=0;
+			        //       oPgs.max=100;
+			        //       var fileList=document.getElementsByClassName('file_list')[0];
+			        //       fileList.innerHTML += filename;
+			        //       fileList.appendChild(oPgs);
+			        //       fileList.innerHTML += '<br>';
+			        //      }
+			   	    //  };
+			        // function save(){
+			        //     var files =frm.file.files;
+			        //     for(var i=0;i<files.length;i++){
+			        //         (function(i){
+			        //           var file= files[i];
+			        //           var formData = new FormData();
+			        //           formData.append('file',file);
+
+			        //           var xhr = new XMLHttpRequest();
+			                  
+			        //           xhr.upload.addEventListener('progress',function(e){
+			        //           var progress=Math.round(e.loaded/e.total*100);
+			        //           var oPrs = document.querySelectorAll('.file_list progress')[i];
+			        //           oPrs.value=progress;
+			        //           },false);
+			                  
+			        //           xhr.upload.onerror=function(){
+			        //             console.log('第'+(i+1)+'文件上传错误')
+			        //           };
+			                   
+			        //           xhr.open('post','./up.php',true);
+			        //           xhr.onreadystatechange=function(){
+			        //             if(xhr.readyState==4 && xhr.status==200){
+			        //                 console.log('第'+(i+1)+'文件上传完毕');
+			        //               }
+			        //           };
+			        //           xhr.send(formData);
+			        //        })(i);
+			        //     };           
+			        // };
+			       
+    </script>
+
+     <div id="mask">
+        <form id="frm" onsubmit="return false;" >
+        <p>
+        上传头像：<input type="file"   onchange="view(this);"  name="file">
+        </p>
+    </form>
+    <!-- <br><br> -->
+    <img width="160px" height="160px" id="viewimg" src="">
+    <div class="progress">
+        <div style="width:0%" class="progress-bar">0%</div>
+    </div>
+    <script>
+          var x=1;
+          $('#pison').click(function(){
+            $('#mask').dialog({
+                width:500,
+                // autopen:false,
+                modal: true,//遮罩
+                title:'添加',
+                buttons:[{
+                text:'保存',
+                click:function(){
+                    $(this).dialog('close');
+                    if(x!=1){
+                        pison.src=viewimg.src;
+                    }
+                   	$('.progress-bar').css('background','white');
+                    $('.progress').css('display','none');
+                    $('.progress-bar').css('display','none');
+                }
+            }]
+         })
+            
+        })
+      function view(th){
+            var flag = false; //状态
+            var arr = ["jpg","png","gif","jpeg","bmp"];
+             //取出上传文件的扩展名
+             var index = th.value.lastIndexOf(".");
+              var ext = th.value.substr(index+1);
+                     //循环比较
+                    for(var i=0;i<arr.length;i++)
+                    {
+                        if(ext == arr[i])
+                    {
+                       flag = true; //一旦找到合适的，立即退出循环
+                       break;
+                   }
+               }
+                     //条件判断
+                     if(flag)
+                     {
+                        var file = th.files[0];
+                        var fileReader = new FileReader();
+                        fileReader.addEventListener('load',function(){
+                            viewimg.src = fileReader.result;
+                            x=2;
+                        },false);
+                        fileReader.readAsDataURL(file);
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('post','up.php',true);
+                        var formData = new FormData();
+                        formData.append('file',frm.file.files[0]);
+                        xhr.upload.addEventListener('progress',function(e){
+                            var progress= Math.round(e.loaded/e.total*100)+'%';
+                            var oPro = document.getElementsByClassName('progress-bar')[0];
+                            oPro.style.width=progress;
+                            oPro.innerHTML=progress;
+                            $('.progress-bar').css('background','green');
+                            $('.progress').css('display','block');
+                            $('.progress-bar').css('display','block');
+                            
+                        },true);
+                        xhr.send(formData);
+
+                }else
+                {
+                  alert("文件名不合法,请重新输入");
+              }
+       }
+
+
+   </script>
+</body>
+</html>
